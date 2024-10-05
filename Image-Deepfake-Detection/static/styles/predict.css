@@ -1,0 +1,123 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #000122;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 2rem;
+  font-size: 2.5rem;
+  color: white;
+}
+
+h2 {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 1.5rem;
+  color: #555; /* Lighten the color for better contrast */
+  font-weight: bold; /* Make the text bold for emphasis */
+}
+
+form {
+  margin-top: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: white;
+}
+
+.upload-container {
+  width: 300px;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+} 
+
+.upload-wrapper {
+  position: relative;
+  background-color: white;
+  width: 100%;
+  border-radius: 10px;
+  height: 2.5rem;
+  padding: 0 15px;
+  box-shadow: 0px 0px 8px #dddddd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.upload-wrapper p {
+  font-size: large;
+  color: black;
+  margin: 0;
+}
+
+button {
+  text-align: center;
+  width: 300px;
+  height: 2.5rem;
+  margin-top: 20px;
+  padding: 15px 30px;
+  color: black;
+  font-size: large;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  font-weight: 200;
+  box-shadow: 0px 0px 8px #dddddd;
+  background-color: #ffffff;
+}
+
+input[type="file"] {
+  opacity: 0;
+  cursor: pointer;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.graph-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 2rem;
+}
+
+.image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-container img {
+  margin-left: 0.5rem;
+}
+
+.loading-symbol {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+  flex-direction: column;
+  color: white;
+  font-size: large;
+}
+
+.file-name {
+  font-size: medium;
+  text-align: center;
+  color: white;  /* Changed to white for visibility against dark background */
+}

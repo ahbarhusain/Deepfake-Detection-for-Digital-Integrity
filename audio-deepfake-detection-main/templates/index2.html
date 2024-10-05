@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audio Classifier</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif; /* Updated font */
+            margin: 0;
+            padding: 0;
+            background: #0a011a; /* Fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #f6e4d6, #e7e0f2); /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(189deg, rgba(2,0,36,1) 0%, rgba(184,25,97,0.9810049019607843) 51%, rgba(2,0,36,1) 100%); /* Modern gradient */
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            max-width: 700px;
+            margin: auto;
+            padding: 30px;
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        h1 {
+            color: #555; /* Changed to blue */
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        p {
+            margin-bottom: 20px;
+            font-size: 1.2em;
+            color: #555;
+        }
+        input[type="file"] {
+            width: calc(100% - 20px);
+            padding: 15px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            transition: border-color 0.3s;
+            box-sizing: border-box;
+        }
+        input[type="file"]:hover {
+            border-color: #007BFF; /* Changed to blue */
+        }
+        button {
+            width: 100%;
+            padding: 15px;
+            background-color: #007BFF; /* Changed to blue */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.2em;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #0069D9; /* Darker blue for hover */
+        }
+        .result {
+            margin-top: 20px;
+            font-weight: bold;
+            padding: 15px;
+            border-radius: 5px;
+            display: inline-block;
+            width: calc(100% - 30px);
+            max-width: 100%;
+        }
+        .error {
+            color: #555;
+            border: 1px solid red;
+            background-color: #ffe6e6;
+        }
+        .success {
+            color: #555;
+            border: 1px solid #007BFF;
+            background-color: #e6f7ff;
+        }
+        /* Spinner styles */
+        .spinner {
+            display: none;
+            margin: 20px auto;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        /* Summarization box styles */
+        .summary {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            display: inline-block;
+            width: calc(100% - 30px);
+            max-width: 100%;
+            background-color: #e6f7ff; /* Light blue background for summary */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Audio Classifier</h1>
+        <p>Upload an audio file to classify it as "fake" or "not fake".</p>
+        
+        <input type="file" id="audioFile" accept=".flac">
+        <button id="uploadBtn">Upload</button>
+        
+        <div class="spinner" id="spinner"></div> <!-- Loading Spinner -->
+        <div class="result" id="result"></div>
+        <div class="summary" id="summary"></div> <!-- Summary Box -->
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $('#uploadBtn').click(function() {
+                const fileInput = $('#audioFile')[0];
+                const file = fileInput.files[0];
+
+                if (!file) {
+                    alert('Please select a file!');
+                    return;
+                }
+
+                // Show the spinner
+                $('#spinner').show();
+                $('#result').text('');  // Clear previous result
+                $('#summary').text(''); // Clear previous summary
+
+                const formData = new FormData();
+                formData.append('file', file);
+
+                $.ajax({
+                    url: '/classify',
+                    type: 'POST',
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function(response) {
+                        // Hide the spinner and show result
+                        $('#spinner').hide();
+                        $('#result').removeClass('error').addClass('success')
+                            .html(`Result: ${response.result}<br>Probability (Not Fake): ${response.probability_not_fake.toFixed(4)}<br>Probability (Fake): ${response.probability_fake.toFixed(4)}`);
+                        
+                        // Display summary if available
+                        if (response.summary) {
+                            $('#summary').html(`Summary: ${response.summary}`);
+                        } else {
+                            $('#summary').text('No summary available.');
+                        }
+                    },
+                    error: function(jqXHR) {
+                        // Hide the spinner and show error message
+                        $('#spinner').hide();
+                        $('#result').removeClass('success').addClass('error')
+                            .text('Error: ' + jqXHR.responseJSON.error);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
