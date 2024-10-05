@@ -12,6 +12,7 @@ To run the audio deepfake detection model, navigate to the audio directory and e
 
 ```bash
 cd audio-deepfake-detection-main
+```
 python main.py
 Image Deepfake Detection
 To run the image deepfake detection model, navigate to the image directory and execute the server script:
