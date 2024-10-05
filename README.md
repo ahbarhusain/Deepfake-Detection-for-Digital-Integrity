@@ -6,8 +6,9 @@ This repository contains implementations for audio, image, text, and video deepf
 
 Make sure you have Python installed (Python 3.7 or higher is recommended). You can create a virtual environment to manage dependencies.
 
-```bash
 # Create a virtual environment (optional)
+
+```bash
 python -m venv venv
 source venv/bin/activate  # On Windows use: venv\Scripts\activate
 
