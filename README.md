@@ -6,15 +6,6 @@ This repository contains implementations for audio, image, text, and video deepf
 
 Make sure you have Python installed (Python 3.7 or higher is recommended). You can create a virtual environment to manage dependencies.
 
-# Create a virtual environment (optional)
-
-```bash
-python -m venv venv
-source venv/bin/activate  # On Windows use: venv\Scripts\activate
-
-# Install required packages
-pip install -r requirements.txt
-
 Usage
 Audio Deepfake Detection
 To run the audio deepfake detection model, navigate to the audio directory and execute the main script:
