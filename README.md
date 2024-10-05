@@ -13,6 +13,9 @@ To run the audio deepfake detection model, navigate to the audio directory and e
 cd audio-deepfake-detection-main
 ```
 ```bash
+pip install -r requirements.txt
+```
+```bash
 python main.py
 ```
 
@@ -21,6 +24,9 @@ To run the image deepfake detection model, navigate to the image directory and e
 
 ```bash
 cd Image-Deepfake-Detection
+```
+```bash
+pip install -r requirements.txt
 ```
 ```bash
 python server.py
@@ -34,6 +40,9 @@ Place the downloaded model in the text deepfake detection directory, then run:
 cd Text-Deepfake-Detection
 ```
 ```bash
+pip install -r requirements.txt
+```
+```bash
 python index.py
 ```
 
@@ -42,6 +51,9 @@ To run the video deepfake detection model, navigate to the video directory and e
 
 ```bash
 cd VideoDeepFakeDetection-main
+```
+```bash
+pip install -r requirements.txt
 ```
 ```bash
 python model.py
